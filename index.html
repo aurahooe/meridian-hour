@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meridian — this hour</title>
+  <meta name="description" content="A small press that turns over every hour. Write a note. Mark it public if you want the room to see it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="top">
+    <a class="mark" href="#now">
+      <span class="dot"></span>
+      Meridian
+    </a>
+    <nav>
+      <a href="#now">This hour</a>
+      <a href="#room">The room</a>
+      <a href="#desk">Desk</a>
+    </nav>
+    <button type="button" class="ghost" id="authToggle">Sign in</button>
+  </header>
+  <main>
+    <section class="hero" id="now">
+      <p class="kicker" id="clock">—</p>
+      <h1 id="headline">The hour is still gathering itself.</h1>
+      <p class="lede" id="editorial">Public notes land here. Every sixty minutes the room chooses one and hangs a short editorial beside it.</p>
+      <article class="feature" id="featureCard" hidden>
+        <p class="meta" id="featureMeta"></p>
+        <h2 id="featureTitle"></h2>
+        <p id="featureBody"></p>
+      </article>
+    </section>
+    <section id="room">
+      <div class="section-head">
+        <h2>The room</h2>
+        <p>Anything marked public is visible to everyone. Private notes stay on your desk.</p>
+      </div>
+      <div class="grid" id="roomGrid"></div>
+    </section>
+    <section id="desk">
+      <div class="section-head">
+        <h2>Desk</h2>
+        <p>Write something you would leave on a kitchen table. Title optional.</p>
+      </div>
+      <form id="noteForm" class="sheet" hidden>
+        <label>Title<input name="title" maxlength="120" placeholder="Usually left blank" /></label>
+        <label>Note<textarea name="body" required maxlength="4000" rows="7" placeholder="What is true this hour?"></textarea></label>
+        <label class="check"><input type="checkbox" name="is_public" checked /> Show this in the public room</label>
+        <button type="submit">Pin it</button>
+      </form>
+      <p class="hint" id="deskHint">Sign in to keep a desk.</p>
+      <div class="mine" id="mine"></div>
+    </section>
+  </main>
+  <dialog id="authDialog">
+    <form id="authForm" method="dialog">
+      <h3 id="authTitle">Sign in</h3>
+      <p class="fine">Email and password. No newsletter. Your notes stay until you delete them.</p>
+      <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+      <label>Password<input type="password" name="password" required minlength="8" autocomplete="current-password" /></label>
+      <label id="handleRow" hidden>Handle<input name="handle" maxlength="24" placeholder="how you appear" /></label>
+      <p class="err" id="authErr" hidden></p>
+      <div class="row">
+        <button type="submit">Continue</button>
+        <button type="button" class="ghost" id="authMode">Need an account</button>
+      </div>
+    </form>
+  </dialog>
+  <footer><p>Meridian turns every hour, on the hour. Built for one room, not a feed.</p></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
